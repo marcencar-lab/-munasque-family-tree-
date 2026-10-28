@@ -206,7 +206,17 @@ header.top h1{{font-family:var(--display);font-weight:600;font-size:clamp(26px,4
 header.top p{{margin:4px 0;color:var(--ink2);max-width:70ch}}
 nav.sec{{position:sticky;top:env(safe-area-inset-top,0px);background:var(--bg);z-index:5;display:flex;gap:4px 14px;flex-wrap:wrap;padding:8px 0;border-bottom:1px solid var(--line);font-size:13px;max-width:1100px;margin:0 auto 12px}}
 nav.sec a{{color:var(--acc);text-decoration:none;white-space:nowrap}} nav.sec a:hover,nav.sec a:focus-visible{{text-decoration:underline;outline:none}}
+nav.sec .navtoggle{{display:none}} nav.sec .links{{display:contents}}
+@media (max-width:760px){{
+ nav.sec{{display:block;padding:6px 0}}
+ nav.sec .navtoggle{{display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border:1px solid var(--line);border-radius:4px;background:var(--surface);color:var(--ink);font:inherit;font-size:14px;cursor:pointer}}
+ nav.sec .navtoggle::after{{content:'';width:0;height:0;border-left:5px solid transparent;border-right:5px solid transparent;border-top:6px solid var(--ink2);transition:transform .15s}}
+ nav.sec.open .navtoggle::after{{transform:rotate(180deg)}}
+ nav.sec .links{{display:none;flex-wrap:wrap;gap:6px 14px;padding:10px 2px 6px}} nav.sec.open .links{{display:flex}}
+ nav.sec .links a{{padding:4px 0;font-size:15px}}
+}}
 main{{max-width:1100px;margin:0 auto}}
+h2,h3,#explorer,#contribute{{scroll-margin-top:56px}}
 main p,main li{{max-width:72ch}}
 h2{{font-family:var(--display);font-weight:600;font-size:26px;margin:40px 0 12px;padding-top:8px;border-top:1px solid var(--line);text-wrap:balance}}
 h3{{font-family:var(--display);font-weight:600;font-size:19px;margin:28px 0 8px}}
@@ -250,7 +260,8 @@ svg.gchart{{font-family:'DejaVu Sans','Noto Sans',Arial,sans-serif;background:va
 <p>{len(P):,} people · {max(p['gen'] for p in P.values())} generations · 9 branches · 1 dated person · 4 descendants corroborated by outside sources</p>
 </header>
 {CONTRIB_HTML}
-<nav class="sec" aria-label="Sections"><a href="#contribute">Contribute</a><a href="#explorer">Explorer</a>{NAV}</nav>
+<nav class="sec" aria-label="Sections"><button class="navtoggle" type="button" aria-expanded="false" aria-controls="seclinks">Sections</button><div class="links" id="seclinks"><a href="#contribute">Contribute</a><a href="#explorer">Explorer</a>{NAV}</div></nav>
+<script>const nv=document.querySelector('nav.sec'),nt=nv&&nv.querySelector('.navtoggle'); if(nt){{nt.addEventListener('click',()=>{{const o=nv.classList.toggle('open');nt.setAttribute('aria-expanded',o?'true':'false');}}); nv.querySelectorAll('.links a').forEach(a=>a.addEventListener('click',()=>{{nv.classList.remove('open');nt.setAttribute('aria-expanded','false');}}));}}</script>
 <main>
 <section id="explorer">
 <h2 id="s-explorer">Interactive tree explorer</h2>

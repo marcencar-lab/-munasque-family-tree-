@@ -87,3 +87,4 @@ Limitation: in this session almost every record website could not be opened (Fam
 3. Obtain photographs: Salimbangon family, Ortigas/FHL/USC reproductions, Diocese of Marbel, UCCP South Cotabato.
 
 - 2026-10-28 (later): six illustrative reconstructions generated (GPT Image via Higgsfield, 2 credits each, approved by the user). Brought into the repo with the manual `fetch_images` workflow because the authoring session cannot reach the image host. Added to the report page header and §7 gallery, the printed cover and §7 of the PDF, and the public site, each captioned and marked "AI-generated illustrative reconstruction, not a photograph". §7.1 and §12 of REPORT.md updated; they carry no evidential weight.
+- 2026-10-28 (later): on phones the sticky section menu now collapses into a single "Sections" button; headings scroll clear of the sticky bar.
