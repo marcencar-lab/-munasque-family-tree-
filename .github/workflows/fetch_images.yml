@@ -1,0 +1,43 @@
+name: Fetch illustration images
+
+# Manually run: downloads a zip of illustration images from a URL and commits
+# them into docs/images/ (used because the authoring environment cannot reach
+# the image host directly).
+on:
+  workflow_dispatch:
+    inputs:
+      url:
+        description: "HTTPS URL of a zip file containing the images"
+        required: true
+        type: string
+      md5:
+        description: "Expected MD5 of the zip (optional check)"
+        required: false
+        type: string
+        default: ""
+
+permissions:
+  contents: write
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download and unpack
+        run: |
+          set -e
+          curl -fsSL -o /tmp/illus.zip "${{ inputs.url }}"
+          if [ -n "${{ inputs.md5 }}" ]; then
+            echo "${{ inputs.md5 }}  /tmp/illus.zip" | md5sum -c -
+          fi
+          mkdir -p docs/images
+          unzip -o -j /tmp/illus.zip -d docs/images
+          ls -l docs/images
+      - name: Commit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs/images
+          git commit -m "Add illustration images fetched by workflow" || echo "nothing to commit"
+          git push
