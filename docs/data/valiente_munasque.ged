@@ -2813,8 +2813,10 @@
 1 FAMS @F0131@
 1 SOUR @S1@
 0 @P0471@ INDI
-1 NAME Felomino /Encarnacion/
-1 NOTE Generation 4 from the progenitor (0 = his parents); estimated birth period c. 1905–1945. Source: FERNANDO!A473. Confidence: moderate.
+1 NAME Filomeno /Encarnacion/
+1 NOTE Generation 4 from the progenitor (0 = his parents); estimated birth period c. 1905–1945. Source: FERNANDO!A473. Confidence: low.
+2 CONT corrected by the family (S64): Family correction supplied by the user, 28 Oct 2026: Sarah A. Muñasque's husband is Filomeno Encarnacion (spreadsheet: Felomino)
+1 NOTE Spelling variant in branch sheets: Felomino Encarnacion
 1 FAMS @F0131@
 1 SOUR @S1@
 0 @P0472@ INDI
@@ -2826,8 +2828,10 @@
 1 FAMS @F0132@
 1 SOUR @S1@
 0 @P0473@ INDI
-1 NAME Sarah /Asong/
-1 NOTE Generation 5 from the progenitor (0 = his parents); estimated birth period c. 1930–1970. Source: FERNANDO!A475. Confidence: moderate.
+1 NAME Antoinette /Asong/
+1 NOTE Generation 5 from the progenitor (0 = his parents); estimated birth period c. 1930–1970. Source: FERNANDO!A475. Confidence: low.
+2 CONT corrected by the family (S64): Family correction supplied by the user, 28 Oct 2026: Ryan M. Encarnacion's wife is Antoinette, not Sarah (spreadsheet: Sarah Asong); the surname Asong is the spreadsheet's and has not been confirmed by the family
+1 NOTE Spelling variant in branch sheets: Sarah Asong
 1 FAMS @F0132@
 1 SOUR @S1@
 0 @P0474@ INDI
