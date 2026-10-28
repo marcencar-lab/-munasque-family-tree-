@@ -4,6 +4,7 @@ OUT=sys.argv[1]; SCR=os.path.dirname(os.path.abspath(__file__))
 D=json.load(open(f'{OUT}/data.json')); P=D['people']
 sources=list(csv.DictReader(open(f'{OUT}/sources.csv')))
 facts=list(csv.DictReader(open(f'{OUT}/research_facts.csv')))
+NCORR=len({f['person_id'] for f in facts if f['confidence'] in ('moderate','high') and f['fact_type'] in ('career','parents','birth','death','identity') and f['source_ids']!='S1' and P[f['person_id']]['gen']>=2 and P[f['person_id']]['role']!='spouse'})
 rels=list(csv.DictReader(open(f'{OUT}/relationships.csv')))
 disc_rows=list(csv.reader(open(f'{OUT}/discrepancies.csv')))
 manual=[r for r in disc_rows[1:] if r and r[0].startswith('DM')]
@@ -78,7 +79,7 @@ PROFILES='\n\n'.join(f"**{t}.** {b}" for t,b in PROF)
 pc=charts['place_counts']; ab=charts['abroad']
 GEO_TEXT=("The branch sheets (S2) give a residence for 72 people, almost all in generations 4–6, so the map shows where the family was living around 2014–2020, not where each person was born. Counts by place: "
  + ', '.join(f"{k} {v}" for k,v in sorted(pc.items(), key=lambda kv:-kv[1])) + f"; abroad: {', '.join(f'{k} {v}' for k,v in ab.items())}. "
- "Only one move is dated and documented: Sulpicio Y. Muñasque from Lala, Lanao del Norte, to Dadiangas (General Santos) on 7 March 1939 (S29). The Opon origin of every other branch is the compiler's statement (S3) supported by the Mactan surnames (Umpad, Patalinghug, Booc, Ynot, Etcuban) in the early generations. The Martin Salimbangon family's home in Curva, Medellin (northern Cebu) comes from the press (S14–S16). All other arrows on the map are therefore hypothetical routes between a documented origin and a documented later residence.")
+ "Three moves are now dated and documented: Marcos Valiente Muñasque was Municipal President of Medellin, northern Cebu, from 1923 to 1933 (S57); his brother Cosmiano was a councilor of Kolambugan, Lanao, in 1945–1946 (S58); and Sulpicio Y. Muñasque went from Lala, Lanao del Norte, to Dadiangas (General Santos) on 7 March 1939 (S29). The Medellin link is older than thought: Agripina's Salimbangon family at Curva and Coronado Muñasque's 2002 resort at Kawit (S60) are in the same town, so part of the family had settled in northern Cebu by the 1920s. The Opon origin of every other branch is the compiler's statement (S3) supported by the Mactan surnames (Umpad, Patalinghug, Booc, Ynot, Etcuban) in the early generations. The Martin Salimbangon family's home in Curva, Medellin (northern Cebu) comes from the press (S14–S16). All other arrows on the map are therefore hypothetical routes between a documented origin and a documented later residence.")
 
 DISC_LIST='\n'.join(f"- **{r[1]}** — {r[2]} *Reading:* {r[3]} ({r[4]})." for r in manual)
 
@@ -95,10 +96,13 @@ GAPS="""Ranked by expected value and feasibility.
 9. **Interview the compiler.** The spreadsheet's author (file saved by "MarkhyNet") interviewed Amador Piligro in 2006 and clearly knew the Cosip/Patalinghug families of Opon personally. Ask for the sources of the 1857 and 1940 dates, the meaning of the colour and "#" conventions, and the sex of each person (needed for a correct GEDCOM).
 10. **Gusat, Ynot, Etcuban, Cosip families of Opon.** These in-law surnames are rare and local; FamilySearch index hits for them in Opon would indirectly confirm the Muñasque entries around them.
 11. **DNA.** No DNA data was supplied. Autosomal tests of descendants from at least three different branches (e.g. Emiliano's, Sotero's and Cosmiano's) would test whether the nine branches really share Fernando and Saturnina as ancestors; Y-DNA from male-line Muñasques would test whether the surname has a single origin. Results give relationship ranges, not exact positions, and cannot by themselves distinguish Fernando from a brother.
-12. **Lower priority:** Col. Coronado Muñasque in Philippine Army/Constabulary rosters; Dr. Ricardo C. Muñasque Jr. in PRC physician lists; Engr. Marlon Cosep in PRC engineer lists; the Tambingag family through Sarangani local records; US/Australian records for the Muñasques abroad."""
+12. **Follow the Medellin trail (new).** Marcos Muñasque was Municipal President of Medellin 1923–1933 (S57) and his wife was a Perez, the surname of his predecessor Pedro Perez; Cosmiano's first wife was a Montesclaros, the surname of Medellin's first municipal president. Medellin's parish and civil registers (1900–1940) and the municipal archive could give Marcos's marriage, his children's baptisms and the family's arrival from Opon.
+13. **Kolambugan, Lanao del Norte (new).** The Official Gazette places Cosmiano Muñasque on the municipal council in 1945–1946 (S58). The Kolambugan civil registry and the parish there should hold his death and his children's records; the January 1946 Gazette page itself still needs to be opened to confirm the 14 Dec 1945 appointment.
+14. **Two Opon graves (new).** Find a Grave lists Crisitina Munasque (1930–2006) and Leonora P. Munasque (1944–2012) in the Lapu-Lapu Municipal Cemetery (S62); neither is in the spreadsheet. A relative in Opon can photograph the stones and ask the cemetery office for the burial register, which names next of kin.
+15. **Lower priority:** Col. Coronado Muñasque in Philippine Army/Constabulary rosters (his business career is now documented, S59, but not the title); Dr. Ricardo C. Muñasque Jr. in PRC physician lists; Engr. Marlon Cosep in PRC engineer lists; the Tambingag family through Sarangani local records; US/Australian records for the Muñasques abroad."""
 
 tpl=open(f'{SCR}/report_template.md',encoding='utf-8').read()
-fill={'N_PEOPLE':f'{len(P):,}','N_GEN':str(max(p['gen'] for p in P.values())),'N_BLOOD':f'{len(blood):,}','N_SPOUSE':str(len(sp)),
+fill={'N_PEOPLE':f'{len(P):,}','N_CORR':{7:'seven',8:'eight',9:'nine',10:'ten',11:'eleven',12:'twelve',13:'thirteen'}.get(NCORR,str(NCORR)),'N_GEN':str(max(p['gen'] for p in P.values())),'N_BLOOD':f'{len(blood):,}','N_SPOUSE':str(len(sp)),
       'MIN_BRANCH':str(min(bsizes.values())),'MAX_BRANCH':str(max(bsizes.values())),'N_OVERRIDES':str(sum(1 for o in overrides if o.get('parent_row') or o.get('gen') or o.get('spouse_of_row'))),
       'N_LOW':str(sum(p['conf']=='low' for p in P.values())),'N_OK':str(nc['ok']),'N_MISMATCH':str(nc['middle-mismatch']+nc['surname-mismatch']),
       'BRANCH_TABLE':BRANCH_TABLE,'BRANCH_SUMMARIES':BRANCH_SUMMARIES,'PROFILES':PROFILES,'GEO_TEXT':GEO_TEXT,'DISC_LIST':DISC_LIST,'GAPS':GAPS,
@@ -185,6 +189,7 @@ for p in P.values():
                    'cf':p['conf'],'lc':p['link_conf'],'row':p['row'],'v':p['variants'],'no':p['notes'],'fx':[(f['type'],f['fact'],f['sources'],f['confidence']) for f in p['facts']]}
 TREEJSON=json.dumps(tree,ensure_ascii=False,separators=(',',':'))
 
+_NC=len({f['person_id'] for f in facts if f['confidence'] in ('moderate','high') and f['fact_type'] in ('career','parents','birth','death','identity') and f['source_ids']!='S1' and P[f['person_id']]['gen']>=2 and P[f['person_id']]['role']!='spouse'})
 CONTRIB=json.load(open(f'{SCR}/contribute.json')) if os.path.exists(f'{SCR}/contribute.json') else {}
 _btn=lambda href,label: f'<a class="cbtn" href="{esc(href)}" target="_blank" rel="noopener">{label}</a>'
 _cards=[]
@@ -257,7 +262,7 @@ svg.gchart{{font-family:'DejaVu Sans','Noto Sans',Arial,sans-serif;background:va
 {IL.figure(IL.HERO,'images/'+IL.HERO[0],'hero',False)}
 <h1>The Muñasque family of Opon, Cebu</h1>
 <p>Genealogical reconstruction from the family spreadsheet "FERNANDO VALIENTE MUÑASQUE.xlsx", with independent web research. Report date 28 October 2026.</p>
-<p>{len(P):,} people · {max(p['gen'] for p in P.values())} generations · 9 branches · 1 dated person · 4 descendants corroborated by outside sources</p>
+<p>{len(P):,} people · {max(p['gen'] for p in P.values())} generations · 9 branches · 1 dated person · {NCORR} descendants corroborated by outside sources</p>
 </header>
 {CONTRIB_HTML}
 <nav class="sec" aria-label="Sections"><button class="navtoggle" type="button" aria-expanded="false" aria-controls="seclinks">Sections</button><div class="links" id="seclinks"><a href="#contribute">Contribute</a><a href="#explorer">Explorer</a>{NAV}</div></nav>
