@@ -182,6 +182,13 @@ for p in P.values():
                    'cf':p['conf'],'lc':p['link_conf'],'row':p['row'],'v':p['variants'],'no':p['notes'],'fx':[(f['type'],f['fact'],f['sources'],f['confidence']) for f in p['facts']]}
 TREEJSON=json.dumps(tree,ensure_ascii=False,separators=(',',':'))
 
+CONTRIB=json.load(open(f'{SCR}/contribute.json')) if os.path.exists(f'{SCR}/contribute.json') else {}
+_btn=lambda href,label: f'<a class="cbtn" href="{esc(href)}" target="_blank" rel="noopener">{label}</a>'
+_cards=[]
+if CONTRIB.get('form_url'): _cards.append('<div class="ccard"><strong>Corrections, dates and stories</strong><p>Wrong name or parent? A birth or marriage date? A memory about someone? Fill in the short form; photos and papers can be attached there too.</p>'+_btn(CONTRIB['form_url'],'Open the form')+'</div>')
+if CONTRIB.get('dropbox_url'): _cards.append('<div class="ccard"><strong>Photos and documents</strong><p>Old photographs, certificates, obituaries, letters. Upload the files here; no account needed. Please add who, where and when in the file name or in the form.</p>'+_btn(CONTRIB['dropbox_url'],'Upload files')+'</div>')
+if CONTRIB.get('email'): _cards.append(f'<div class="ccard"><strong>Prefer email?</strong><p>Send anything to <span class="mono" id="cemail">{esc(CONTRIB["email"])}</span>. Say which person in the tree it concerns and how you know it.</p><button class="cbtn" type="button" id="copymail">Copy address</button></div>')
+CONTRIB_HTML=('<section class="contrib" id="contribute"><h2 id="s-help-improve-the-tree" style="border-top:0;margin-top:0">Help improve the tree</h2><p>This tree was rebuilt from one family spreadsheet with almost no dates and no photographs. Every correction, date, photo or document from a relative makes it more accurate. Everything sent in is checked against the records before it is added, and the site is updated afterwards.</p><div class="cgrid">'+''.join(_cards)+'</div></section>') if _cards else ''
 page=f'''<title>Muñasque Family Lineage</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <style>
@@ -223,6 +230,11 @@ svg.gchart{{font-family:'DejaVu Sans','Noto Sans',Arial,sans-serif;background:va
 .link{{fill:none;stroke:var(--edge);stroke-width:1}} .link.low{{stroke:var(--warn);stroke-dasharray:3 3}}
 .legend{{font-size:12px;color:var(--ink2);padding:6px 10px;display:flex;gap:14px;flex-wrap:wrap}}
 .sr{{position:absolute;left:-9999px}}
+.contrib{{max-width:1100px;margin:16px auto 0;border:1px solid var(--acc2);border-radius:6px;padding:14px 16px;background:var(--surface)}}
+.contrib p{{margin:4px 0 10px}} .cgrid{{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}}
+.ccard{{border:1px solid var(--line);border-radius:6px;padding:12px;display:flex;flex-direction:column;gap:6px;min-width:0}} .ccard p{{font-size:14px;color:var(--ink2);margin:0;flex:1}}
+.cbtn{{display:inline-block;align-self:flex-start;background:var(--acc2);color:#fff;border:0;border-radius:4px;padding:8px 14px;font:inherit;font-size:14px;text-decoration:none;cursor:pointer}} .cbtn:hover,.cbtn:focus-visible{{filter:brightness(1.08);outline:none}}
+.mono{{font-family:var(--mono);font-size:14px;user-select:all}}
 @media (prefers-reduced-motion:reduce){{*{{transition:none!important}}}}
 </style>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@400;600&family=Source+Sans+3:wght@400;600&display=swap">
@@ -231,7 +243,8 @@ svg.gchart{{font-family:'DejaVu Sans','Noto Sans',Arial,sans-serif;background:va
 <p>Genealogical reconstruction from the family spreadsheet "FERNANDO VALIENTE MUÑASQUE.xlsx", with independent web research. Report date 28 October 2026.</p>
 <p>{len(P):,} people · {max(p['gen'] for p in P.values())} generations · 9 branches · 1 dated person · 4 descendants corroborated by outside sources</p>
 </header>
-<nav class="sec" aria-label="Sections"><a href="#explorer">Explorer</a>{NAV}</nav>
+{CONTRIB_HTML}
+<nav class="sec" aria-label="Sections"><a href="#contribute">Contribute</a><a href="#explorer">Explorer</a>{NAV}</nav>
 <main>
 <section id="explorer">
 <h2 id="s-explorer">Interactive tree explorer</h2>
@@ -323,6 +336,7 @@ document.getElementById('expand2').addEventListener('click',()=>{{collapseBelow(
 document.getElementById('expand4').addEventListener('click',()=>{{collapseBelow(5);update();}});
 document.getElementById('collapse').addEventListener('click',()=>{{collapseBelow(2);update();}});
 if(window.d3){{update();show('P0003');}}
+const cm=document.getElementById('copymail'); if(cm){{cm.addEventListener('click',()=>{{const t=document.getElementById('cemail').textContent; (navigator.clipboard&&navigator.clipboard.writeText?navigator.clipboard.writeText(t):Promise.reject()).then(()=>{{cm.textContent='Copied';}}).catch(()=>{{const r=document.createRange();r.selectNodeContents(document.getElementById('cemail'));const sel=getSelection();sel.removeAllRanges();sel.addRange(r);cm.textContent='Selected, press copy';}});}});}}
 </script>
 '''
 os.makedirs(f'{OUT}/site',exist_ok=True)
