@@ -81,24 +81,26 @@ def render_tree(root, title, caption, show_res=True, fname=None):
 
 # ---------- 1. pedigree ----------
 def pedigree():
-    W,H=780,300
+    W,H=780,360
     o=[f'<svg class="gchart" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" width="{W}" height="{H}" role="img" aria-label="Pedigree of Emiliano Valiente Muñasque">',STYLE,
        '<text x="12" y="24" class="h ink">Direct ancestral pedigree (all generations known)</text>',
-       '<text x="12" y="40" class="cap">Earliest named ancestors: Alejandro Muñasque and Saturnina Umpad. No dates survive for them. Dashed = low confidence (header entry only).</text>']
+       '<text x="12" y="40" class="cap">Earliest named ancestors: Alejandro Muñasque and Saturnina Umpad. No dates survive for them.</text>',
+       '<text x="12" y="53" class="cap">Dashed box = low confidence (named in the sheet header only).</text>']
+    T=70   # top of the box area, below the two caption lines
     def box(x,y,w,h,lines,low=False):
         o.append(f'<rect x="{x}" y="{y}" width="{w}" height="{h}" rx="3" class="box{" low" if low else ""}"/>')
         ty=y+16
         for l,k in lines:
             o.append(f'<text x="{x+w/2}" y="{ty}" text-anchor="middle" class="{"t ink" if k=="t" else "s sp"}">{esc(l)}</text>'); ty+=14 if k=='t' else 12
-    box(20,120,200,60,[('Emiliano Valiente Muñasque','t'),('b. 20 May 1857 – d. 19 Feb 1940','s'),('G2 · m. Irenea Gusat','s')])
-    box(250,70,180,46,[('Fernando Umpad Muñasque','t'),('G1 · progenitor · b. c. 1820–1835 (est.)','s')])
-    box(250,170,180,46,[('Saturnina N. Valiente','t'),('G1 · 1st wife · parents unknown','s')])
-    box(460,30,170,46,[('Alejandro Muñasque','t'),('G0 · named in header only','s')],low=True)
-    box(460,110,170,46,[('Saturnina Umpad','t'),('G0 · named in header only','s')],low=True)
-    o.append('<path d="M220 150 H235 V93 H250 M235 150 V193 H250" class="edge"/>')
-    o.append('<path d="M430 93 H445 V53 H460 M445 93 V133 H460" class="edge low"/>')
-    o.append('<text x="250" y="250" class="s cap">Fernando\'s 8 siblings, if any, are unknown. Saturnina Valiente\'s middle initial "N." is the only clue to her mother\'s surname.</text>')
-    o.append('<text x="250" y="266" class="s cap">Sources: S1 (sheet FERNANDO rows 1–5). Estimated birth of Fernando assumes a first child born 1857.</text>')
+    box(20,T+100,200,60,[('Emiliano Valiente Muñasque','t'),('b. 20 May 1857 – d. 19 Feb 1940','s'),('G2 · m. Irenea Gusat','s')])
+    box(240,T+50,205,46,[('Fernando Umpad Muñasque','t'),('G1 · progenitor · b. c. 1825–1835 (est.)','s')])
+    box(240,T+150,205,46,[('Saturnina N. Valiente','t'),('G1 · 1st wife · parents unknown','s')])
+    box(475,T+10,170,46,[('Alejandro Muñasque','t'),('G0 · named in header only','s')],low=True)
+    box(475,T+90,170,46,[('Saturnina Umpad','t'),('G0 · named in header only','s')],low=True)
+    o.append(f'<path d="M220 {T+130} H230 V{T+73} H240 M230 {T+130} V{T+173} H240" class="edge"/>')
+    o.append(f'<path d="M445 {T+73} H460 V{T+33} H475 M460 {T+73} V{T+113} H475" class="edge low"/>')
+    o.append(f'<text x="20" y="{T+230}" class="s cap">Fernando\'s siblings, if any, are unknown. Saturnina Valiente\'s middle initial "N." is the only clue to her mother\'s surname.</text>')
+    o.append(f'<text x="20" y="{T+246}" class="s cap">Sources: S1 (sheet FERNANDO rows 1–5). The estimated birth of Fernando assumes a first child born 1857 (see §4.1).</text>')
     o.append('</svg>'); s='\n'.join(o); open(f'{CH}/pedigree.svg','w').write(s); return s
 
 # ---------- 2. overview (gen 0–2 with branch sizes) ----------
