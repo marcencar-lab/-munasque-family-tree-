@@ -191,17 +191,35 @@ for r_,o in OVR.items():
         q['surname']=o['set_surname']; q['display']=q['display'].rsplit(' ',1)[0]+' '+o['set_surname']
 # family corrections (corrections.csv next to the scripts): field values supplied by relatives after publication
 crp=os.path.join(os.path.dirname(os.path.abspath(__file__)),'corrections.csv')
+_orig={}
 if os.path.exists(crp):
     for c in csv.DictReader(open(crp,encoding='utf-8')):
         r_=int(c['sheet_row'])
         if r_ not in byrow: continue
-        q=byrow[r_]; old=q['display']
+        q=byrow[r_]; _orig.setdefault(r_,q['display'])
         if c['field']=='given':
             q['display']=q['display'].replace(q['given'],c['new_value'],1); q['given']=c['new_value']
+        elif c['field']=='surname':
+            q['display']=q['display'].rsplit(' ',1)[0]+' '+c['new_value']; q['surname']=c['new_value']
         else:
             q[c['field']]=c['new_value']
-        if old!=q['display'] and old not in q['variants']: q['variants'].append(old)
         q['notes'].append(f"corrected by the family ({c['source']}): {c['note']}")
+    for r_,od in _orig.items():
+        q=byrow[r_]
+        if od!=q['display'] and od not in q['variants']: q['variants'].append(od)
+# family additions (additions.csv): people not in the spreadsheet, supplied by relatives; synthetic rows 9001+
+adp=os.path.join(os.path.dirname(os.path.abspath(__file__)),'additions.csv')
+if os.path.exists(adp):
+    for n_,a in enumerate(csv.DictReader(open(adp,encoding='utf-8')),1):
+        pr=int(a['parent_row'])
+        if pr not in byrow: continue
+        parent=byrow[pr]
+        rw=dict(display=a['display'],given=a['given'],middle=a['middle'],surname=a['surname'],suffix='',nickname='',title='',
+                row=9000+n_,raw=a['display'],gen_label='',colour='',indent=parent['indent']+1)
+        q=add_person(rw, parent['generation']+1, 'family addition', a.get('role') or 'person')
+        byrow[9000+n_]=q
+        link_child(q, parent, f"family addition {a['source']}")
+        q['notes'].append(f"added from family information ({a['source']}), not in the spreadsheet: {a['note']}")
 # recompute name checks for children of renamed people
 for rl in rels:
     if rl['type']!='parent-child' or rl.get('name_check') not in ('middle-mismatch','surname-mismatch'): continue

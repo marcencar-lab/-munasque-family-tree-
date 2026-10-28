@@ -2828,9 +2828,10 @@
 1 FAMS @F0132@
 1 SOUR @S1@
 0 @P0473@ INDI
-1 NAME Antoinette /Asong/
+1 NAME Antoinette /Chua/
 1 NOTE Generation 5 from the progenitor (0 = his parents); estimated birth period c. 1930–1970. Source: FERNANDO!A475. Confidence: low.
 2 CONT corrected by the family (S64): Family correction supplied by the user, 28 Oct 2026: Ryan M. Encarnacion's wife is Antoinette, not Sarah (spreadsheet: Sarah Asong); the surname Asong is the spreadsheet's and has not been confirmed by the family
+2 CONT corrected by the family (S64): Family correction supplied by the user, 28 Oct 2026: Ryan's wife is Antoinette Chua
 1 NOTE Spelling variant in branch sheets: Sarah Asong
 1 FAMS @F0132@
 1 SOUR @S1@
@@ -10085,6 +10086,12 @@
 1 NOTE Generation 4 from the progenitor (0 = his parents); estimated birth period c. 1905–1945. Source: FERNANDO!A1930. Confidence: moderate.
 1 FAMC @F0456@
 1 SOUR @S1@
+0 @P1789@ INDI
+1 NAME Kaylee /Encarnacion/
+1 NOTE Generation 6 from the progenitor (0 = his parents); estimated birth period c. 1955–1995. Source: FERNANDO!A9001. Confidence: low.
+2 CONT added from family information (S64), not in the spreadsheet: Daughter of Ryan M. Encarnacion and Antoinette Chua, supplied by the family 28 Oct 2026; middle name not supplied; listed after Dominic because her position among the siblings was not stated
+1 FAMC @F0132@
+1 SOUR @S1@
 0 @F0001@ FAM
 1 HUSB @P0001@
 1 WIFE @P0002@
@@ -10945,6 +10952,7 @@
 1 HUSB @P0472@
 1 WIFE @P0473@
 1 CHIL @P0474@
+1 CHIL @P1789@
 1 NOTE HUSB/WIFE assignment is inferred from which surname the children carry; the spreadsheet does not record sex.
 0 @F0133@ FAM
 1 HUSB @P0475@

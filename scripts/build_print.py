@@ -38,7 +38,7 @@ def person_line(p):
     return ' '.join(bits)
 def walk(pid, depth, num):
     p=P[pid]
-    reg.append(f'<div class="reg d{min(depth,6)}"><span class="num">{num}</span> {person_line(p)} <span class="src">row {p["row"]}</span></div>')
+    reg.append(f'<div class="reg d{min(depth,6)}"><span class="num">{num}</span> {person_line(p)} <span class="src">{'family info (S64)' if p["row"]>=9000 else 'row '+str(p["row"])}</span></div>')
     for i,c in enumerate(P[pid]['children'],1):
         walk(c, depth+1, f'{num}.{i}')
 walk('P0003',0,'1')

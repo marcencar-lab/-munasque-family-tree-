@@ -22,6 +22,7 @@ the D3 library).
 | `registers/sources.csv` | Bibliography (S1–S43) with record type and URL. |
 | `registers/research_facts.csv` | Facts found outside the spreadsheet, linked to people and sources. |
 | `registers/discrepancies.csv` | Curated conflict log plus automatic row-level flags. |
+| `registers/additions.csv` (also `scripts/additions.csv`) | People the family added after publication who are not in the spreadsheet (parent row, name, note); they get synthetic rows 9001 and up. |
 | `registers/corrections.csv` (also `scripts/corrections.csv`) | Corrections sent in by the family after publication: spreadsheet row, field, new value, note. Applied by the parser on every rebuild. |
 | `registers/overrides.csv`, `registers/variant_map.csv` | Every editorial decision that moved a person or merged a spelling variant, with the reason. |
 | `valiente_munasque.ged` | GEDCOM 5.5.1 export for genealogy programs (see limits in REPORT.md §12). |
@@ -44,7 +45,7 @@ python3 scripts/build_print.py out && node scripts/pdf.js out/print/report_print
 python3 scripts/build_public.py .   # writes public/ (copy to docs/); needs out/images/*.jpg and out/images/small/*.jpg (900 px copies)
 python3 scripts/validate.py
 ```
-Needs Python 3 with `openpyxl`. `overrides.csv`, `variant_map.csv` and `corrections.csv` must sit next to the scripts.
+Needs Python 3 with `openpyxl`. `overrides.csv`, `variant_map.csv`, `corrections.csv` and `additions.csv` must sit next to the scripts.
 
 ## Privacy
 

@@ -333,7 +333,7 @@ function show(id){{
    ${{p.res?`<dt>Residence</dt><dd>${{esc(p.res)}} <span style="color:var(--ink2)">(branch sheets, c. 2014–2020)</span></dd>`:''}}
    ${{p.v.length?`<dt>Variants</dt><dd>${{esc(p.v.join('; '))}}</dd>`:''}}
    <dt>Confidence</dt><dd><span class="pill ${{p.cf}}">${{p.cf}}</span> placement${{p.lc?`, <span class="pill ${{p.lc}}">${{p.lc}}</span> link to parents`:''}}</dd>
-   <dt>Source</dt><dd>S1, sheet FERNANDO row ${{p.row}}</dd></dl>
+   <dt>Source</dt><dd>${{p.row>=9000?'S64, family information (not in the spreadsheet)':'S1, sheet FERNANDO row '+p.row}}</dd></dl>
    ${{p.no.length?'<p style="font-size:13px"><strong>Notes:</strong> '+esc(p.no.join(' · '))+'</p>':''}}
    ${{fx?'<p style="margin:8px 0 2px"><strong>Outside facts</strong></p><ul style="padding-left:18px;font-size:13px">'+fx+'</ul>':''}}`;
   d.querySelectorAll('[data-go]').forEach(a=>a.addEventListener('click',e=>{{e.preventDefault();reveal(a.dataset.go);}}));

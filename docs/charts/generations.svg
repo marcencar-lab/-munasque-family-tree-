@@ -39,9 +39,9 @@ svg.gchart{font-family:'DejaVu Sans','Noto Sans',Arial,sans-serif;--ink:#1d1b17;
 <text x="332.0" y="64.0" text-anchor="middle" class="s ink">524+178</text>
 <text x="332.0" y="254" text-anchor="middle" class="s ink">G5</text>
 <text x="332.0" y="267" text-anchor="middle" class="s cap" font-size="7.5">c. 1930–1970</text>
-<rect x="362" y="150.6" width="44" height="89.4" fill="var(--acc)" rx="2"/>
-<rect x="362" y="134.1" width="44" height="14.5" fill="var(--edge)" rx="2"/>
-<text x="384.0" y="130.1" text-anchor="middle" class="s ink">369+60</text>
+<rect x="362" y="150.4" width="44" height="89.6" fill="var(--acc)" rx="2"/>
+<rect x="362" y="133.9" width="44" height="14.5" fill="var(--edge)" rx="2"/>
+<text x="384.0" y="129.9" text-anchor="middle" class="s ink">370+60</text>
 <text x="384.0" y="254" text-anchor="middle" class="s ink">G6</text>
 <text x="384.0" y="267" text-anchor="middle" class="s cap" font-size="7.5">c. 1955–1995</text>
 <rect x="414" y="213.1" width="44" height="26.9" fill="var(--acc)" rx="2"/>

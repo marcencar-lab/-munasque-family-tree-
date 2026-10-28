@@ -8,7 +8,7 @@ svg.gchart{font-family:'DejaVu Sans','Noto Sans',Arial,sans-serif;--ink:#1d1b17;
 .g0,.g1{fill:var(--acc)}.gen{font-size:9px;fill:var(--acc)}
 </style>
 <text x="12" y="24" class="h ink">Branch: Emiliano Valiente Muñasque (G2) and descendants to G4</text>
-<text x="12" y="40" class="cap">390 recorded descendants in this branch; boxes list spouse(s) and residence where the branch sheets give one. Dashed boxes/lines = low-confidence placement. Deeper generations: use the explorer.</text>
+<text x="12" y="40" class="cap">391 recorded descendants in this branch; boxes list spouse(s) and residence where the branch sheets give one. Dashed boxes/lines = low-confidence placement. Deeper generations: use the explorer.</text>
 <rect x="2936.2" y="50" width="181.6" height="40" rx="3" class="box"/>
 <text x="3027.0" y="64" text-anchor="middle" class="t ink">Emiliano Valiente Muñasque</text>
 <text x="3027.0" y="78" text-anchor="middle" class="s sp">⚭ Irenea Gusat</text>
@@ -223,7 +223,7 @@ svg.gchart{font-family:'DejaVu Sans','Noto Sans',Arial,sans-serif;--ink:#1d1b17;
 <rect x="4669.4" y="230" width="135.4" height="52" rx="3" class="box low"/>
 <text x="4737.1" y="244" text-anchor="middle" class="t ink">Sarah A. Muñasque</text>
 <text x="4737.1" y="258" text-anchor="middle" class="s sp">⚭ Filomeno Encarnacion</text>
-<text x="4737.1" y="270" text-anchor="middle" class="s cap">+4 more below (see explorer)</text>
+<text x="4737.1" y="270" text-anchor="middle" class="s cap">+5 more below (see explorer)</text>
 <text x="4672.4" y="279" class="gen">G4</text>
 <path d="M4597.6 174 V202.0 H4903.0 V230" class="edge"/>
 <rect x="4818.8" y="230" width="168.4" height="52" rx="3" class="box low"/>
