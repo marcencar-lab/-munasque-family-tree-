@@ -9,6 +9,7 @@ import importlib.util
 spec=importlib.util.spec_from_file_location('bs',f'{SCR}/build_site.py')
 # build_site runs on import; capture its md2html and the markdown text it wrote
 bs=importlib.util.module_from_spec(spec); spec.loader.exec_module(bs)
+import illus as IL
 md=open(f'{OUT}/REPORT.md',encoding='utf-8').read()
 secs=re.split(r'\n(?=## )', md)
 
@@ -51,7 +52,9 @@ for s in secs:
     if t.startswith('## 2.'): h+=chart('generations.svg')
     if t.startswith('## 4.'):
         h=h.replace('<h3 id="s-4-2',chart('pedigree.svg')+chart('overview.svg')+'<h3 id="s-4-2',1)
-    if t.startswith('## 7.'): h+=chart('map.svg')+chart('timeline.svg')
+    if t.startswith('## 7.'):
+        h=h.replace('<h3 id="s-7-1',IL.gallery('images','illus',False)+'<h3 id="s-7-1',1)
+        h+=chart('map.svg')+chart('timeline.svg')
     if t.startswith('## 8.'): h=chart('evidence.svg')+h
     body.append(h)
 page=f'''<!doctype html><html><head><meta charset="utf-8"><title>The Muñasque family of Opon, Cebu — printable report</title>
@@ -71,9 +74,11 @@ svg.gchart{{font-family:'DejaVu Sans',Arial,sans-serif;background:#fff}}
 .reg{{font-family:'DejaVu Sans',Arial,sans-serif;font-size:8.6pt;margin:1.5pt 0;page-break-inside:avoid}} .reg .num{{display:inline-block;min-width:26mm;color:#1a4d8f;font-variant-numeric:tabular-nums}} .reg .src{{color:#888;font-size:7pt}} .reg .low{{color:#b26a00}} .reg .fact{{color:#333;font-style:italic}}
 .d1{{margin-left:4mm}}.d2{{margin-left:8mm}}.d3{{margin-left:12mm}}.d4{{margin-left:16mm}}.d5{{margin-left:20mm}}.d6{{margin-left:24mm}}
 .toc li{{margin:2pt 0}}
+.hero{{margin:0 0 10pt;page-break-inside:avoid}} .hero img{{width:100%;height:auto;display:block}} .hero figcaption{{font-size:7pt;color:#777;text-align:right}}
+.illus-grid{{display:grid;grid-template-columns:1fr 1fr;gap:8pt;margin:8pt 0}} figure.illus{{margin:0;page-break-inside:avoid;border:1px solid #ccc;padding:3pt}} figure.illus img{{width:100%;height:auto;display:block}} figure.illus figcaption{{font-size:8pt;line-height:1.35;color:#333;margin-top:3pt}} .ai{{display:block;color:#b26a00;font-style:normal;font-weight:bold;font-size:7.5pt}} .illus-credit{{font-size:8.5pt;color:#444;border-left:3px solid #999;padding:3pt 8pt;margin:6pt 0 10pt}}
 .note{{border-left:3px solid #1a4d8f;padding:4pt 8pt;background:#f3f6fb;margin:8pt 0}}
 </style></head><body>
-<div class="cover"><h1>The Muñasque family of Opon (Lapu-Lapu City), Cebu</h1><p>A genealogical reconstruction from the family spreadsheet “FERNANDO VALIENTE MUÑASQUE.xlsx”, with independent web research.</p><p>Printable edition, 28 October 2026.</p><p>{len(P):,} people in {max(p['gen'] for p in P.values())} generations descending from Fernando Umpad Muñasque and Saturnina N. Valiente.</p>
+<div class="cover" style="padding-top:30mm">{IL.figure(IL.HERO,'images/'+IL.HERO[0],'hero',False)}<h1>The Muñasque family of Opon (Lapu-Lapu City), Cebu</h1><p>A genealogical reconstruction from the family spreadsheet “FERNANDO VALIENTE MUÑASQUE.xlsx”, with independent web research.</p><p>Printable edition, 28 October 2026.</p><p>{len(P):,} people in {max(p['gen'] for p in P.values())} generations descending from Fernando Umpad Muñasque and Saturnina N. Valiente.</p>
 <div class="note">How to read this document: Part A is the written report with its charts. Part B is the complete descendant register, numbered so that 1 is Fernando, 1.3 his third listed child, 1.3.2 that child's second child, and so on. Each entry gives spouse(s), residence where known, the spreadsheet row it came from, and a “low confidence” mark where the placement is uncertain. The wide branch charts are in the online version and the SVG files; they do not fit a printed page.</div>
 <h3>Contents</h3><ol class="toc">{''.join(f'<li>{esc(t.split(chr(10),1)[0][3:])}</li>' for t in secs[1:])}<li>Part B — Descendant register</li></ol></div>
 <h1>Part A — Report</h1>
@@ -82,6 +87,8 @@ svg.gchart{{font-family:'DejaVu Sans',Arial,sans-serif;background:#fff}}
 <p class="note">Numbering: 1 = Fernando Umpad Muñasque; 1.n = his n-th listed child; deeper numbers follow the same rule. Children are listed in the order the family spreadsheet gives them, which is not necessarily birth order. “m.” = married/partner. Residence is as given in the branch sheets (c. 2014–2020). Source rows refer to sheet FERNANDO, column A.</p>
 {REG}
 </body></html>'''
-os.makedirs(f'{OUT}/print',exist_ok=True)
+os.makedirs(f'{OUT}/print/images',exist_ok=True)
+import shutil
+for it in IL.ILLUS+[IL.HERO]: shutil.copy(f'{OUT}/images/{it[0]}',f'{OUT}/print/images/')
 open(f'{OUT}/print/report_print.html','w',encoding='utf-8').write(page)
 print('print html bytes',len(page.encode()),'register entries',len(reg))

@@ -85,3 +85,5 @@ Limitation: in this session almost every record website could not be opened (Fam
 1. Verify "Moñasque" on the 1849 catalogue scan (Google Books p. 87 / Issuu p. 121).
 2. Opon parish registers on FamilySearch (5000324) for 1850–1860 baptisms carrying the new surname, and for Emiliano (1857) and Fernando.
 3. Obtain photographs: Salimbangon family, Ortigas/FHL/USC reproductions, Diocese of Marbel, UCCP South Cotabato.
+
+- 2026-10-28 (later): six illustrative reconstructions generated (GPT Image via Higgsfield, 2 credits each, approved by the user). Brought into the repo with the manual `fetch_images` workflow because the authoring session cannot reach the image host. Added to the report page header and §7 gallery, the printed cover and §7 of the PDF, and the public site, each captioned and marked "AI-generated illustrative reconstruction, not a photograph". §7.1 and §12 of REPORT.md updated; they carry no evidential weight.

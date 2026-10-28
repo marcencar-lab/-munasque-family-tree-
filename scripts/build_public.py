@@ -1,6 +1,6 @@
 import re,sys,os,shutil,glob
 S=sys.argv[1]
-page=open(f'{S}/out/site/munasque-lineage.html',encoding='utf-8').read()
+page=open(f'{S}/out/site/munasque-lineage-linked.html',encoding='utf-8').read()
 strip='''<section style="max-width:1100px;margin:12px auto 0;display:flex;gap:10px;flex-wrap:wrap;font-size:14px">
 <a href="Munasque_family_report.pdf" style="border:1px solid var(--line);border-radius:4px;padding:6px 10px;text-decoration:none">Printable PDF</a>
 <a href="data/valiente_munasque.ged" style="border:1px solid var(--line);border-radius:4px;padding:6px 10px;text-decoration:none">GEDCOM file</a>
@@ -17,4 +17,6 @@ for f in glob.glob(f'{S}/out/charts/*.svg'): shutil.copy(f,f'{S}/public/charts/'
 for f in ['people.csv','relationships.csv','sources.csv','research_facts.csv','discrepancies.csv']: shutil.copy(f'{S}/out/{f}',f'{S}/public/data/')
 shutil.copy(f'{S}/out/valiente_munasque.ged',f'{S}/public/data/'); shutil.copy(f'{S}/out/data.json',f'{S}/public/data/')
 shutil.copy(f'{S}/out/print/Munasque_family_report.pdf',f'{S}/public/'); shutil.copy(f'{S}/out/print/report_print.html',f'{S}/public/print.html')
+os.makedirs(f'{S}/public/images',exist_ok=True)
+for f in glob.glob(f'{S}/out/images/*.jpg'): shutil.copy(f,f'{S}/public/images/')
 print('public site built')

@@ -10,6 +10,7 @@ manual=[r for r in disc_rows[1:] if r and r[0].startswith('DM')]
 auto=[r for r in disc_rows if r and r[0].startswith('D0') or (r and r[0].startswith('D1'))]
 overrides=list(csv.DictReader(open(f'{SCR}/overrides.csv')))
 charts=json.load(open(f'{OUT}/charts/index.json'))
+sys.path.insert(0,SCR); import illus as IL
 esc=html.escape
 def cnt(pid): return sum(1+cnt(c) for c in P[pid]['children'])
 blood=[p for p in P.values() if p['role']!='spouse']; sp=[p for p in P.values() if p['role']=='spouse']
@@ -169,7 +170,9 @@ for s in secs:
         h=h.replace('<h3 id="s-4-2',chart('pedigree.svg')+chart('overview.svg')+'<h3 id="s-4-2',1)
         bl=''.join(chart(f'branch_{c}.svg') for c,_,_,_,_,_ in charts['branches'])
         h=h.replace('<h3 id="s-4-3',bl+'<h3 id="s-4-3',1)
-    if t.startswith('## 7.'): h+=chart('map.svg')+chart('timeline.svg')
+    if t.startswith('## 7.'):
+        h=h.replace('<h3 id="s-7-1',IL.gallery('images')+'<h3 id="s-7-1',1)
+        h+=chart('map.svg')+chart('timeline.svg')
     if t.startswith('## 8.'): h=chart('evidence.svg')+h
     body_html.append(h)
 SHORT={'1':'Summary','2':'Inventory','3':'Method','4':'Lineage','5':'Profiles','6':'Research','7':'Geography','8':'Evidence','9':'Discrepancies','10':'Next steps','11':'Privacy','12':'Files','13':'Conclusion','14':'Sources'}
@@ -210,6 +213,8 @@ h3{{font-family:var(--display);font-weight:600;font-size:19px;margin:28px 0 8px}
 a{{color:var(--acc)}} code{{font-family:var(--mono);font-size:.9em;background:var(--surface);border:1px solid var(--line);border-radius:3px;padding:0 3px}}
 .tablewrap{{overflow-x:auto;margin:12px 0;border:1px solid var(--line);border-radius:4px;background:var(--surface)}}
 table{{border-collapse:collapse;font-size:14px;min-width:100%}} th,td{{text-align:left;vertical-align:top;padding:6px 9px;border-bottom:1px solid var(--line)}} th{{font-size:12px;letter-spacing:.04em;text-transform:uppercase;color:var(--ink2);background:var(--bg)}}
+.hero{{margin:0 0 14px;position:relative;border-radius:6px;overflow:hidden;border:1px solid var(--line);background:var(--surface)}} .hero img{{display:block;width:100%;height:auto;aspect-ratio:1400/600;object-fit:cover}} .hero figcaption{{font-size:11px;color:var(--ink2);padding:4px 8px;text-align:right}}
+.illus-grid{{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px;margin:14px 0 6px}} figure.illus{{margin:0;border:1px solid var(--line);border-radius:4px;background:var(--surface);overflow:hidden}} figure.illus img{{display:block;width:100%;height:auto}} figure.illus figcaption{{font-size:13px;color:var(--ink2);padding:8px 10px;line-height:1.45}} figure.illus figcaption b{{color:var(--ink)}} .ai{{display:block;margin-top:4px;font-size:12px;color:var(--warn);font-style:normal;font-weight:600}} .illus-credit{{font-size:13px;color:var(--ink2);border-left:3px solid var(--line);padding:4px 10px;margin:8px 0 16px}}
 figure.chart{{margin:16px 0;border:1px solid var(--line);border-radius:4px;background:var(--surface)}} .scroller{{overflow-x:auto;padding:6px}} .scroller svg{{display:block;max-width:none}}
 svg.gchart{{font-family:'DejaVu Sans','Noto Sans',Arial,sans-serif;background:var(--surface)}}
 .ink{{fill:var(--ink)}}.ink2{{fill:var(--ink2)}}.box{{fill:var(--box);stroke:var(--boxline);stroke-width:1}}.box.low{{stroke-dasharray:4 3;stroke:var(--warn)}}
@@ -239,6 +244,7 @@ svg.gchart{{font-family:'DejaVu Sans','Noto Sans',Arial,sans-serif;background:va
 </style>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@400;600&family=Source+Sans+3:wght@400;600&display=swap">
 <header class="top">
+{IL.figure(IL.HERO,'images/'+IL.HERO[0],'hero',False)}
 <h1>The Muñasque family of Opon, Cebu</h1>
 <p>Genealogical reconstruction from the family spreadsheet "FERNANDO VALIENTE MUÑASQUE.xlsx", with independent web research. Report date 28 October 2026.</p>
 <p>{len(P):,} people · {max(p['gen'] for p in P.values())} generations · 9 branches · 1 dated person · 4 descendants corroborated by outside sources</p>
@@ -340,5 +346,9 @@ const cm=document.getElementById('copymail'); if(cm){{cm.addEventListener('click
 </script>
 '''
 os.makedirs(f'{OUT}/site',exist_ok=True)
-open(f'{OUT}/site/munasque-lineage.html','w',encoding='utf-8').write(page)
+open(f'{OUT}/site/munasque-lineage-linked.html','w',encoding='utf-8').write(page)
+emb=page
+for it in IL.ILLUS+[IL.HERO]:
+    emb=emb.replace(f'src="images/{it[0]}"','src="'+IL.data_uri(f'{OUT}/images/small/{it[0]}')+'"')
+open(f'{OUT}/site/munasque-lineage.html','w',encoding='utf-8').write(emb)
 print('report chars',len(md),'page bytes',len(page.encode()))

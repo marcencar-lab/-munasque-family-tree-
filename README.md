@@ -25,6 +25,7 @@ the D3 library).
 | `registers/overrides.csv`, `registers/variant_map.csv` | Every editorial decision that moved a person or merged a spelling variant, with the reason. |
 | `valiente_munasque.ged` | GEDCOM 5.5.1 export for genealogy programs (see limits in REPORT.md §12). |
 | `data.json` | The whole tree as structured data. |
+| `docs/images/` | Six AI-generated illustrative reconstructions (Opon c. 1900, the old Opon church, the 1939 Sarangani Bay landing, a Panguil Bay homestead, a 1940s Koronadal settlement, header art). Labelled as illustrations, not photographs; see REPORT.md §7.1. |
 | `charts/` | Editable SVG charts: pedigree, overview, nine branch charts, map, timeline, evidence diagram, generation sizes. |
 | `sources/` | Copy of the supplied spreadsheet, a plain-text dump of every cell, and the open CC-BY-4.0 transcription of the 1849 Catálogo alfabético de apellidos (ruzcko/catalogo-1849) used to check the surname. |
 | `research/` | Seven web-research reports (two rounds, picture research, fact-check) with every query tried and every URL found, plus the catalogue rows cited. |
@@ -39,6 +40,7 @@ python3 scripts/finalize.py out
 python3 scripts/charts.py out
 python3 scripts/build_site.py out
 python3 scripts/build_print.py out && node scripts/pdf.js out/print/report_print.html out/print/Munasque_family_report.pdf
+python3 scripts/build_public.py .   # writes public/ (copy to docs/); needs out/images/*.jpg and out/images/small/*.jpg (900 px copies)
 python3 scripts/validate.py
 ```
 Needs Python 3 with `openpyxl`. `overrides.csv` and `variant_map.csv` must sit next to the scripts.
