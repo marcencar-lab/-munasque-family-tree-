@@ -270,7 +270,7 @@ svg.gchart{{font-family:'DejaVu Sans','Noto Sans',Arial,sans-serif;background:va
 <main>
 <section id="explorer">
 <h2 id="s-explorer">Interactive tree explorer</h2>
-<p>Click a circle to open or close a branch; click a name to see details. Filled circles have hidden children. Orange names and dashed lines mark low-confidence placements. Spouses are shown in the detail panel, not as tree nodes.</p>
+<p>Click a circle to open or close a branch; click a name to see details. Filled circles have hidden children. Orange names and dashed lines mark low-confidence placements. Spouses are shown in the detail panel, not as tree nodes. Siblings are listed eldest to youngest, in the order the family gives them.</p>
 <div class="explorer">
  <div class="bar"><label class="sr" for="q">Search a name</label><input id="q" type="search" placeholder="Search a name (e.g. Salimbangon, Sulpicio, Cosip)"><button id="expand2" type="button">Show to G3</button><button id="expand4" type="button">Show to G5</button><button id="collapse" type="button">Collapse all</button><span class="hint" id="hint">Generation numbering: G1 = Fernando Umpad Muñasque; G0 = his parents.</span></div>
  <div class="wrap"><div class="treebox"><svg id="tree" role="img" aria-label="Collapsible family tree"></svg></div><aside class="detail" id="detail"><h4>Fernando Umpad Muñasque</h4><p>Select a person to see parents, spouses, children, residence, confidence and any outside facts.</p></aside></div>
@@ -320,14 +320,16 @@ function update(){{
 function countDesc(d){{let c=0;(function w(x){{(x._children||[]).forEach(k=>{{c++;w(k);}});}})(d);return c;}}
 function esc(s){{return String(s).replace(/[&<>"]/g,c=>({{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}})[c]);}}
 function nameOf(id){{return id&&T[id]?esc(T[id].n):'';}}
+function birthOrder(p){{const par=T[p.f]||T[p.m]; if(!par||!par.c||par.c.length<2) return ''; const i=par.c.indexOf(p.id); return i<0?'':`<dt>Birth order</dt><dd>${{i+1}} of ${{par.c.length}} <span style="color:var(--ink2)">(eldest first, as listed by the family)</span></dd>`;}}
 function show(id){{
   sel=id;const p=T[id];const d=document.getElementById('detail');
   const par=[p.f,p.m].filter(x=>x).map(x=>`<a href="#" data-go="${{x}}">${{nameOf(x)}}</a>`).join(' &amp; ')||'<em>not recorded</em>';
   const sps=p.s.map(x=>`<a href="#" data-go="${{x}}">${{nameOf(x)}}</a>`).join(', ')||'<em>none recorded</em>';
   const kids=p.c.map(x=>`<a href="#" data-go="${{x}}">${{nameOf(x)}}</a>`).join(', ')||'<em>none recorded</em>';
+  const bo=birthOrder(p);
   const fx=p.fx.map(f=>`<li><strong>${{esc(f[0])}}:</strong> ${{esc(f[1])}} <span class="pill ${{esc(f[3])}}">${{esc(f[3])}}</span> <span style="color:var(--ink2)">[${{esc(f[2])}}]</span></li>`).join('');
   d.innerHTML=`<h4>${{esc(label(p))}}${{p.nk?' <span style="font-weight:normal;color:var(--ink2)">"'+esc(p.nk)+'"</span>':''}}</h4>
-   <dl><dt>Generation</dt><dd>G${{p.g}} ${{p.r==='s'?'(spouse)':''}}</dd><dt>Parents</dt><dd>${{par}}</dd><dt>Spouse(s)</dt><dd>${{sps}}</dd><dt>Children</dt><dd>${{kids}}</dd>
+   <dl><dt>Generation</dt><dd>G${{p.g}} ${{p.r==='s'?'(spouse)':''}}</dd><dt>Parents</dt><dd>${{par}}</dd><dt>Spouse(s)</dt><dd>${{sps}}</dd><dt>Children</dt><dd>${{kids}}</dd>${{bo}}
    ${{p.res?`<dt>Residence</dt><dd>${{esc(p.res)}} <span style="color:var(--ink2)">(branch sheets, c. 2014–2020)</span></dd>`:''}}
    ${{p.v.length?`<dt>Variants</dt><dd>${{esc(p.v.join('; '))}}</dd>`:''}}
    <dt>Confidence</dt><dd><span class="pill ${{p.cf}}">${{p.cf}}</span> placement${{p.lc?`, <span class="pill ${{p.lc}}">${{p.lc}}</span> link to parents`:''}}</dd>

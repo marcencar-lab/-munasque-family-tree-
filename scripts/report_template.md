@@ -47,7 +47,7 @@ The spreadsheet is a **derivative source**: nobody's birth, baptism or marriage 
 |---|---|---|---|---|---|
 {{BRANCH_TABLE}}
 
-Estimated birth years for this generation: 1857 (Emiliano) to about 1880. The order in the sheet is probably not birth order.
+Estimated birth years for this generation: 1857 (Emiliano) to about 1880. The family states that siblings are listed eldest to youngest throughout the sheet (confirmed 28 Oct 2026); Emiliano, the only dated child (b. 1857), is indeed listed first. The order is kept everywhere in this report and marked as the family's statement where no dates exist.
 
 ### 4.3 Branch summaries
 

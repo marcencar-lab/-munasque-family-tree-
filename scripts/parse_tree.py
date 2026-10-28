@@ -189,6 +189,19 @@ for r_,o in OVR.items():
     if o.get('set_surname') and r_ in byrow:
         q=byrow[r_]; q['variants'].append(q['display']); q['notes'].append('surname set to maiden name: '+o['reason'])
         q['surname']=o['set_surname']; q['display']=q['display'].rsplit(' ',1)[0]+' '+o['set_surname']
+# family corrections (corrections.csv next to the scripts): field values supplied by relatives after publication
+crp=os.path.join(os.path.dirname(os.path.abspath(__file__)),'corrections.csv')
+if os.path.exists(crp):
+    for c in csv.DictReader(open(crp,encoding='utf-8')):
+        r_=int(c['sheet_row'])
+        if r_ not in byrow: continue
+        q=byrow[r_]; old=q['display']
+        if c['field']=='given':
+            q['display']=q['display'].replace(q['given'],c['new_value'],1); q['given']=c['new_value']
+        else:
+            q[c['field']]=c['new_value']
+        if old!=q['display'] and old not in q['variants']: q['variants'].append(old)
+        q['notes'].append(f"corrected by the family ({c['source']}): {c['note']}")
 # recompute name checks for children of renamed people
 for rl in rels:
     if rl['type']!='parent-child' or rl.get('name_check') not in ('middle-mismatch','surname-mismatch'): continue

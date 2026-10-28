@@ -470,7 +470,7 @@ P0468,Isabella Rose B. Bristowe,Isabella,Rose B.,Bristowe,,,,6,colour depth,pers
 P0469,Ambrose B. Brestowe,Ambrose,B.,Brestowe,,,,6,spouse,spouse,,,P0468,,,,,,471,AMBROSE B. BRESTOWE,,S1,moderate
 P0470,Sarah A. Muñasque,Sarah,A.,Muñasque,,,,4,override: middle initial A. = Ancajas: child of Francisco G. Muñasque & Cesaria Ancajas,person,P0426,P0427,P0471,P0472|P0475,,,,5,472,SARAH A. MUÑASQUE,override: middle initial A. = Ancajas: child of Francisco G. Muñasque & Cesaria Ancajas,S1,low
 P0471,Felomino Encarnacion,Felomino,,Encarnacion,,,,4,spouse,spouse,,,P0470,P0472|P0475,,,,,473,FELOMINO ENCARNACION,,S1,moderate
-P0472,Iryan M. Encarnacion,Iryan,M.,Encarnacion,,,,5,colour depth,person,P0471,P0470,P0473,P0474,,,,6,474,IRYAN M. ENCARNACION,,S1,moderate
+P0472,Ryan M. Encarnacion,Ryan,M.,Encarnacion,,,,5,colour depth,person,P0471,P0470,P0473,P0474,,,Iryan M. Encarnacion,6,474,IRYAN M. ENCARNACION,"corrected by the family (S64): Family correction supplied by the user, 28 Oct 2026: the eldest son of Sarah A. Muñasque and Felomino Encarnacion is named Ryan (spreadsheet: Iryan)",S1; S2,low
 P0473,Sarah Asong,Sarah,,Asong,,,,5,spouse,spouse,,,P0472,P0474,,,,,475,SARAH ASONG,,S1,moderate
 P0474,Dominic A. Encarnacion,Dominic,A.,Encarnacion,,,,6,colour depth,person,P0472,P0473,,,,,,7,476,DOMINIC A. ENCARNACION,,S1,moderate
 P0475,Marc Ian M. Encarnacion,Marc,Ian M.,Encarnacion,,,,5,sibling by colour level,person,P0471,P0470,P0476,P0477,,,,6,477,MARC IAN M. ENCARNACION,,S1,moderate

@@ -84,7 +84,7 @@ svg.gchart{{font-family:'DejaVu Sans',Arial,sans-serif;background:#fff}}
 <h1>Part A — Report</h1>
 {''.join(body)}
 <h1 style="page-break-before:always">Part B — Descendant register</h1>
-<p class="note">Numbering: 1 = Fernando Umpad Muñasque; 1.n = his n-th listed child; deeper numbers follow the same rule. Children are listed in the order the family spreadsheet gives them, which is not necessarily birth order. “m.” = married/partner. Residence is as given in the branch sheets (c. 2014–2020). Source rows refer to sheet FERNANDO, column A.</p>
+<p class="note">Numbering: 1 = Fernando Umpad Muñasque; 1.n = his n-th listed child; deeper numbers follow the same rule. Children are listed eldest to youngest, in the order the family gives them (confirmed by the family, 28 Oct 2026); where no dates exist this order is the family's statement, not a documented fact. “m.” = married/partner. Residence is as given in the branch sheets (c. 2014–2020). Source rows refer to sheet FERNANDO, column A.</p>
 {REG}
 </body></html>'''
 os.makedirs(f'{OUT}/print/images',exist_ok=True)

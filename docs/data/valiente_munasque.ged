@@ -2818,8 +2818,10 @@
 1 FAMS @F0131@
 1 SOUR @S1@
 0 @P0472@ INDI
-1 NAME Iryan M. /Encarnacion/
-1 NOTE Generation 5 from the progenitor (0 = his parents); estimated birth period c. 1930–1970. Source: FERNANDO!A474. Confidence: moderate.
+1 NAME Ryan M. /Encarnacion/
+1 NOTE Generation 5 from the progenitor (0 = his parents); estimated birth period c. 1930–1970. Source: FERNANDO!A474. Confidence: low.
+2 CONT corrected by the family (S64): Family correction supplied by the user, 28 Oct 2026: the eldest son of Sarah A. Muñasque and Felomino Encarnacion is named Ryan (spreadsheet: Iryan)
+1 NOTE Spelling variant in branch sheets: Iryan M. Encarnacion
 1 FAMC @F0131@
 1 FAMS @F0132@
 1 SOUR @S1@
