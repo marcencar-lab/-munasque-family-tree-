@@ -86,3 +86,35 @@ the page itself unless marked "snippet only".
 - Google Books full-text and PARES: rate-limited from the sandbox.
 - PSA certificates, Lapu-Lapu civil registry: paid or in-person only.
 - DNA sites: need a tested relative.
+
+## Round 8b: the two Opon graves (Cristina and Leonora P. Munasque)
+
+Asked whether these two women are family, the following was tried (28 Oct 2026, later session):
+
+- **The grave pages themselves.** Find a Grave blocks automated readers, but asking the Wayback Machine to
+  archive each page worked. Both memorials (240661312 Crisitina Munasque, 1930–2006; 240661319 Leonora P.
+  Munasque, 1944–2012) were created on 15 June 2022 by the contributor "Lgcs", carry no photograph, no
+  inscription, no plot number and no family links, and photo requests are disabled for the cemetery. They
+  look like transcriptions from a burial register, so the names and dates are probably reliable but they
+  name no relatives. (The memorial numbers next to theirs belong to unrelated graves elsewhere, so the
+  "neighbouring graves" idea gave nothing.)
+- **The same cemetery, other family surnames.** The cemetery's own search (Lapu-Lapu Municipal Cemetery,
+  Find a Grave cemetery 2755028) lists no Muñasque beyond these two, no Gusat, Ynot, Etcuban, Umpad,
+  Valiente or Lloren; 2 Cosep (Benita B. Cosep 1941–2010, Flaviana Cosep 1949–2000) and 18 Patalinghug
+  (among them Ananias B. 1916–1999, Conrado T. 1912–1979, Carlito 1944–1984, Elizabeth 1938–2000, Eduardo
+  1945–2008). None of these names is in the spreadsheet either.
+- **The tree.** No Cristina, Kristina or Tina Muñasque, and no Muñasque man's wife named Cristina or
+  Leonora. The only Leonora Muñasque (Leonora G., daughter of Asisclo Gusat Muñasque, m. Damian Lloren,
+  Polomolok) has a different middle initial and lived in Mindanao. Branches whose children would carry a
+  middle initial P.: Cruz Valiente Muñasque m. Remedios Dela Piña (only two recorded children, so possibly
+  incomplete) and Gideon A. Muñasque Sr. m. Elsa Guarde Paredes (children probably born after 1944).
+- **Web search** for either name in any spelling: nothing.
+- **Time-sensitive notice.** SunStar Cebu (Oct 2026): Lapu-Lapu City will exhume 791 remains buried five
+  years or more at the municipal cemetery in Sitio Tugas, Barangay Gun-ob on 15 November 2026; families
+  have until 14 December 2026 to claim remains through the City Health Office (032-340-5339; sanitary
+  inspector Benjie Celera 0932-973-0753), after which unclaimed remains go to a common bone chamber. Both
+  women were buried there more than five years ago. The City Health Office keeps the burial register that
+  names the next of kin, which is the one record that would settle who they were.
+
+Conclusion: not placeable from online sources. Verdict stays "unplaced namesakes of Opon" until a
+relative, or the City Health Office burial register, names their parents or husbands.
